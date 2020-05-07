@@ -7,6 +7,7 @@ from joblib import dump
 from preprocess import prep_data
 from sklearn.model_selection import KFold
 from sklearn.metrics import classification_report
+from sklearn.metrics import mean_squared_error
 
 df = pd.read_csv(("fish_participant.csv"))
 
@@ -20,12 +21,13 @@ print(kf)
 for train_index, test_index in kf.split(X):
     print("TRAIN:", train_index, "TEST:", test_index)
     X_train, X_test = X[train_index], X[test_index]
-    y_train, y_test = y[train_index], [test_index]
+    y_train, y_test = y[train_index], y[test_index]
     
 
 wrf = RandomForestClassifier(class_weight = "balanced")
 wrf.fit(X_train, y_train)
 y_pred = wrf.predict(X_test)
+print(mean_squared_error(y_test,y_pred))
 
 # nb = GaussianNB()
 # nb.fit(X, y)
