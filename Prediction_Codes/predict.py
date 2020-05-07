@@ -3,6 +3,12 @@ import os
 from joblib import load
 from preprocess import prep_data
 import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from preprocess import prep_data
+from sklearn.model_selection import KFold
+from sklearn.metrics import classification_report
 
 def predict_from_csv(path_to_csv):
 
